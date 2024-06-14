@@ -1,6 +1,5 @@
 // console.log("Javascript is working sfsdff")
 import * as THREE from 'three'
-import { positionGeometry } from 'three/examples/jsm/nodes/Nodes.js'
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
