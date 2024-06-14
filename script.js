@@ -1,5 +1,6 @@
 // console.log("Javascript is working sfsdff")
 import * as THREE from 'three'
+import { positionGeometry } from 'three/examples/jsm/nodes/Nodes.js'
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
@@ -7,14 +8,40 @@ const canvas = document.querySelector('canvas.webgl')
 // Scene
 const scene = new THREE.Scene()
 
+/**
+ * Objects
+ */
 
-// Geometry
-const geometry = new THREE.BoxGeometry(1, 1, 1)
-const material = new THREE.MeshBasicMaterial({color: 'red'})
+const group = new THREE.Group()
+group.position.y = 1
+group.scale.y = 2
+group.rotation.y = 1
+scene.add(group)
 
-const mesh = new THREE.Mesh(geometry, material)
-scene.add(mesh)
+const cube1 = new THREE.Mesh(
+    new THREE.BoxGeometry(1, 1, 1),
+    new THREE.MeshBasicMaterial({color: "red"})
+)
+const cube2 = new THREE.Mesh(
+    new THREE.BoxGeometry(1, 1, 1),
+    new THREE.MeshBasicMaterial({color: "green"})
+)
+cube2.position.x = -2
+const cube3 = new THREE.Mesh(
+    new THREE.BoxGeometry(1, 1, 1),
+    new THREE.MeshBasicMaterial({color: "blue"})
+)
+cube3.position.x = 2
 
+
+group.add(cube1, cube2, cube3)
+
+// Axes helper
+
+const axesHelper  = new THREE.AxesHelper()
+scene.add(axesHelper)
+// console.log(mesh.position.distanceTo(camera.position))
+// mesh.position.normalize()
 // Sizes
 const sizes = {
     width: 800,
@@ -24,8 +51,11 @@ const sizes = {
 // Camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height)
 camera.position.z = 3
+// camera.position.y = 1
+// camera.position.x = 1
 scene.add(camera)
 
+// camera.lookAt(mesh.position)
 
 // Renderer
 
