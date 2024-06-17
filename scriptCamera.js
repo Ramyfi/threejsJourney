@@ -1,3 +1,4 @@
+import './style.css';
 import * as THREE from 'three'
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js'
 
@@ -27,9 +28,52 @@ const mesh = new THREE.Mesh(
 scene.add(mesh)
 
 const sizes = {
-    width: 800,
-    height: 600
+    width: window.innerWidth,
+    height: window.innerHeight
 }
+
+window.addEventListener('resize', () => {
+    // update sizes
+    sizes.width = window.innerWidth
+    sizes.height = window.innerHeight
+
+    // Update camera
+    camera.aspect = sizes.width / sizes.height
+    camera.updateProjectionMatrix()
+
+    // Update Renderer
+    renderer.setSize(sizes.width, sizes.height)
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+})
+
+window.addEventListener('dblclick', () => {
+    // web kit for Safari
+
+    const fullscreenElement = document.fullscreenElement || document.webkitFullscreenElement
+    if(!fullscreenElement)
+        {
+        if(canvas.requestFullscreen)
+        {
+            canvas.requestFullscreen()
+        }
+        else if(canvas.webkitRequestFullscreen)
+            {
+                canvas.webkitFullscreen()
+            }
+    }
+    else
+    {
+        if(document.exitFullscreen)
+            {
+                document.exitFullscreen()
+            }
+        else if(document.webkitExitFullScreen) {
+            document.exitFullscreen()
+        }
+
+    }
+})
+
 
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
 // const aspectRatio = sizes.width / sizes.height
@@ -42,7 +86,7 @@ const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 
 // //     100)
 // camera.position.x = 2
 // camera.position.y = 2
-camera.position.z = 3
+camera.position.z = 5
 camera.lookAt(mesh.position)
 console.log(camera.position.length(mesh.position))
 scene.add(camera)
