@@ -21,8 +21,8 @@ const canvas = document.querySelector('canvas.webgl')
 const scene = new THREE.Scene()
 
 const mesh = new THREE.Mesh(
-    new THREE.BoxGeometry(1, 1, 1, 5, 5, 5),
-    new THREE.MeshBasicMaterial({ color: 0x00ff00 })
+    new THREE.BoxGeometry(1, 1, 1, 4, 4, 4),
+    new THREE.MeshBasicMaterial({ color: 0x00ff00, wireframe : true})
 )
 
 scene.add(mesh)
