@@ -1,4 +1,5 @@
 // console.log("Javascript is working sfsdff")
+import './style.css';
 import * as THREE from 'three'
 
 // Canvas
